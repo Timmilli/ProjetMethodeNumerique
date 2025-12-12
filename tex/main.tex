@@ -1,0 +1,151 @@
+\documentclass[a4paper,french]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{titlesec}
+\usepackage{csquotes}
+
+% Figures
+\usepackage{graphicx}
+\graphicspath{{./img/}}
+
+\usepackage{amsmath}
+% Refs
+\usepackage[style=numeric,sorting=none,language=french]{biblatex}
+\usepackage{hyperref}
+\usepackage{cleveref}
+\usepackage{xcolor}
+\hypersetup{
+	colorlinks=true,
+	linkcolor=blue,
+	urlcolor=blue,
+	citecolor=blue}
+
+% \citeref to be used instead of \cref
+% corrects a bug that happens when using babel french language and cleveref british language
+\newcommand{\citeref}[1]{%
+		\begin{otherlanguage}{british}%
+		\cref{#1}%
+		\end{otherlanguage}
+}
+\newcommand{\Citeref}[1]{%
+		\begin{otherlanguage}{british}%
+		\Cref{#1}%
+		\end{otherlanguage}
+}
+
+\crefname{table}{table}{tables}
+\Crefname{table}{Table}{Tables}
+
+
+% Extra
+\usepackage[left=1cm,right=1cm,top=1cm,bottom=1cm]{geometry}
+\usepackage{url}
+\usepackage{appendix}
+\usepackage{tablefootnote}
+\usepackage{tabularx}
+\usepackage{subcaption}
+\usepackage{booktabs}
+
+% regular chapters
+\titleformat{\chapter}[block]
+	{\Huge\bfseries\scshape} % text format
+	{} % no label
+	{0pt} % space between number and title
+	{} % title only
+\titlespacing*{\chapter}{0pt}{-20pt}{40pt} % left, above, beneath spaces
+
+% to be used only in annexes
+\newcommand{\anxchapter}[1]{%
+		\titleformat{\chapter}[block]%
+		{\normalfont\Huge\bfseries}%
+		{Annexe \Alph{chapter} : }%
+		{0pt}%
+		{}%
+		\titlespacing*{\chapter}{0pt}{-20pt}{20pt} % left, above, beneath spaces
+		\chapter{#1}%
+}
+
+
+\addbibresource{references.bib}
+
+
+% Correction of a bug between amsmath and cleveref where labels wouldn't work anymore
+\makeatletter
+\AtBeginDocument
+ {
+	 \def\ltx@label#1{\cref@label{#1}}%add braces
+	 \def\label@in@display@noarg#1{\cref@old@label@in@display{#1}}%remove braces
+	\def\label@in@mmeasure@noarg#1{%
+		\begingroup%
+			\measuring@false%
+			\cref@old@label@in@display{#1}%remove braces for multiline
+		\endgroup}%
+ } %
+\makeatother
+
+\begin{document}
+
+\begin{equation}
+	x = A^+_R b + [I - A^+_R A] \alpha
+\end{equation}
+
+\begin{equation}
+	\theta = \theta_0 - J^+F(\theta_0) + [I - J^+J]\alpha
+\end{equation}
+
+\begin{equation}
+	\begin{bmatrix}
+		\theta_1 \\
+		\vdots   \\
+		\vdots   \\
+		\theta_4
+	\end{bmatrix}
+	=
+	\begin{bmatrix}
+		\theta_1 \\
+		\vdots   \\
+		\vdots   \\
+		\theta_4
+	\end{bmatrix}
+	-
+	\begin{bmatrix}
+		j^+_{11} & j^+_{12} \\
+		\vdots   & \vdots   \\
+		\vdots   & \vdots   \\
+		j^+_{41} & j^+_{42}
+	\end{bmatrix}
+	\begin{bmatrix}
+		f_{11} & f_{12} & f_{13} & f_{14} \\
+		f_{21} & f_{22} & f_{23} & f_{24}
+	\end{bmatrix}
+	+
+	\begin{bmatrix}
+
+		\begin{bmatrix}
+			1 & 0 & 0 & 0 \\
+			0 & 1 & 0 & 0 \\
+			0 & 0 & 1 & 0 \\
+			0 & 0 & 0 & 1 \\
+		\end{bmatrix}
+		-
+		\begin{bmatrix}
+			j^+_{11} & j^+_{12} \\
+			\vdots   & \vdots   \\
+			\vdots   & \vdots   \\
+			j^+_{41} & j^+_{42}
+		\end{bmatrix}
+		\begin{bmatrix}
+			j_{11} & j_{12} & j_{13} & j_{14} \\
+			j_{21} & j_{22} & j_{23} & j_{24}
+		\end{bmatrix}
+	\end{bmatrix}
+	\begin{bmatrix}
+		\alpha_1 \\
+		\alpha_2
+	\end{bmatrix}
+\end{equation}
+
+\end{document}
+
