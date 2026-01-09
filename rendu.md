@@ -9,6 +9,8 @@ On souhaite générer une trajectoire pour un bras robotique redondant à 4 degr
     Configuration du robot : en bleu le bras, en vert l'objectif, en rouge l'obstacle
 </p>
 
+L’objectif est d’atteindre une position finale d’outil tout en esquivant un obstacle sur le chemin. Pour cela, on va “naviguer” dans le null-space afin de réaliser cet évitement.
+
 ## 1. Les maths
 
 L’objectif est d’atteindre une position finale d’outil tout en esquivant un obstacle sur le chemin. Pour cela, on va “naviguer” dans le null-space afin de réaliser cet évitement.
